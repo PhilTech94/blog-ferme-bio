@@ -1,0 +1,11 @@
+<div class="slideshow">
+    {% for article in sliderArticles %}
+        <div class="slide">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content|slice(0, 200) }}...</p>
+            <a href="#">Découvrir</a>
+        </div>
+    {% else %}
+        <p>Aucun article tendance pour le moment.</p>
+    {% endfor %}
+</div>

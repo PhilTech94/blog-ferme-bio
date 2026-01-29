@@ -40,4 +40,31 @@ class ArticleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /**
+     * Récupère les articles les plus récents pour le slider
+     * @return Article[]
+     */
+    public function findLatestForSlider(int $limit = 3): array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Récupère les articles récents pour la page d'accueil (hors slider)
+     * @return Article[]
+     */
+    public function findLatestArticles(int $limit = 6, int $offset = 0): array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
