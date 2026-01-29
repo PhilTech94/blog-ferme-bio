@@ -1,11 +1,27 @@
-<div class="slideshow">
-    {% for article in sliderArticles %}
-        <div class="slide">
-            <h2>{{ article.title }}</h2>
-            <p>{{ article.content|slice(0, 200) }}...</p>
-            <a href="#">Découvrir</a>
-        </div>
-    {% else %}
-        <p>Aucun article tendance pour le moment.</p>
-    {% endfor %}
+<div
+	class="slideshow" data-controller="slideshow">
+
+	{# Bouton Précédent #}
+	<button type="button" data-action="slideshow#previous" class="slideshow-btn slideshow-btn--prev">
+		←
+	</button>
+
+	{# Les slides #}
+	<div class="slideshow-container">
+		{% for article in sliderArticles %}
+			<div class="slide" data-slideshow-target="slide">
+				<h2>{{ article.title }}</h2>
+				<p>{{ article.content|slice(0, 200) }}...</p>
+				<a href="#">Découvrir</a>
+			</div>
+		{% else %}
+			<p>Aucun article tendance pour le moment.</p>
+		{% endfor %}
+	</div>
+
+	{# Bouton Suivant #}
+	<button type="button" data-action="slideshow#next" class="slideshow-btn slideshow-btn--next">
+		→
+	</button>
+
 </div>
